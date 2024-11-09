@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>List of students</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
+integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
+crossorigin="anonymous">
+</head>
+<body>
+
+	<nav class="navbar navbar-dark bg-dark">
+	  <a class="navbar-brand">Students control</a>
+	  <form class="form-inline">
+		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+	  </form>
+	</nav>
+	
+	<div class="container">
+		<div class="row">
+			<h1> List of Students</h1>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<a th:href="@{/students/new}" class="btn btn-primary btn-sm mb3">Add student</a>
+				</div>
+		</div>
+		<br>
+		<table class="table table-striped table-bordered">
+		  <thead class="thead-dark">
+			<tr>
+			  <th scope="col">Name</th>
+			  <th scope="col">Last name</th>
+			  <th scope="col">Email</th>
+			  <th scope="col">Actions</th>
+			</tr>
+		  </thead>
+		  <tbody>
+				<tr th:each="student : ${students}">
+				  <td th:text="${student.name}">Name</td>
+				  <td th:text="${student.lastname}">Last name</td>
+				  <td th:text="${student.email}">Email</td>
+				  <td>
+					<a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-info">Edit</a>
+					<a th:href="@{/students/{id}/(id=${student.id})}" class="btn btn-danger">Delete</a>
+				  </td>
+				</tr>
+		  </tbody>
+		</table>
+
+	</div>
+	
+</body>
+</html>
