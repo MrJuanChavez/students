@@ -42,4 +42,11 @@ public class Rol {
 		super();
 	}
 
+	public Rol(String name) {
+		super();
+		this.name = name;
+	}
+	
+	
+
 }
