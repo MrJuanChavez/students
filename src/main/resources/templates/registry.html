@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Student registry</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
+integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
+crossorigin="anonymous">
+</head>
+<body>
+
+	<nav class="navbar navbar-dark bg-dark">
+	  <a class="navbar-brand">Create user account</a>
+	  <form class="form-inline">
+		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+	  </form>
+	</nav>
+	
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<div th:if=${param.succed}>
+					<div class"alert alert-info">Your account has been registered in the system</div>
+				</div>
+					
+			<h1 class="text-center"> Please create an account</h1>
+				<div class="card-body">
+					<form th:action="@{/registry}" th:object="${user}" method="POST">
+						<div class="form-group">
+							<label>Name : </label>
+							<input type="text" name="Name" th:field="*{name}" class="form-control" placeholder="Your name goes here" required autofocus="autofocus">
+						</div>
+						
+						<div class="form-group">
+							<label>Last name : </label>
+							<input type="text" name="lastname" th:field="*{lastname}" class="form-control" placeholder="Your lastname goes here" required>
+						</div>
+						
+						<div class="form-group">
+							<label>Email : </label>
+							<input type="email" name="email" th:field="*{email}" class="form-control" placeholder="Your Email goes here" required>
+						</div>
+						
+						<div class="form-group">
+							<label>Password : </label>
+							<input type="password" name="password" th:field="*{password}" class="form-control" placeholder="Your password goes here" required>
+						</div>
+						
+						<div class="box-footer">
+							<button type="submit" class="btn btn-success">Submit</button>
+							<span>If you already have an account <a th:href="@{/login}">log in here</a></span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+		crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" 
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
+		crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" 
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+		crossorigin="anonymous"></script>
+	</script>
+	
+</body>
+</html>

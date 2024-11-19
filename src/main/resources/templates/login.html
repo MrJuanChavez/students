@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Log in</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
+integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
+crossorigin="anonymous">
+</head>
+<body>
+
+	<nav class="navbar navbar-dark bg-dark">
+	  <a class="navbar-brand">Log in</a>
+	  <form class="form-inline">
+		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+	  </form>
+	</nav>
+	
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				
+					
+			<h1 class="text-center"> Log in</h1>
+				<div class="card-body">
+					<form th:action="@{/login}" method="POST">
+						<div th:if="${param.error}">
+							<div class="alert alert-danger">Invalid user or password</div>
+						</div>
+						
+						<div th:if="${param.succed}">
+							<div class="alert alert-info">Your account has been registered in the system</div>
+						</div>
+						
+						<div th:if="${param.logout}">
+							<div class="alert alert-info">You closed the session succesfuly</div>
+						</div>
+						
+						<div class="form-group">
+							<label>Username : </label>
+							<input type="text" name="username" placeholder="Input your Email" class="form-control"  required autofocus="autofocus">
+						</div>
+						
+						<div class="form-group">
+							<label>Password : </label>
+							<input type="password" name="password" placeholder="Input your password" class="form-control"  required>
+						</div>
+						
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-6 col-md-offset-3">
+									<input type="submit" class="form-control btn btn-primary" id="login-submit" value="Start session"/>
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="form-group">
+						<span>If you are a new user <a th:href="@{/registry}">register here</a></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+		crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" 
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
+		crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" 
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+		crossorigin="anonymous"></script>
+</body>
+</html>

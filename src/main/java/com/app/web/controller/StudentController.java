@@ -18,7 +18,7 @@ public class StudentController {
 	@Autowired
 	private StudentService service;
 	
-	@GetMapping({"/students", "/"})
+	@GetMapping({"/students"})
 	public String listStudents(Model model) {
 		model.addAttribute("students", service.listAllStudents());
 		return "students"; //sends us to the file "students"
