@@ -49,7 +49,7 @@ public class WebSecurityConfig {
 		.formLogin(form -> form
 				.loginPage("/login")
 				.permitAll())
-		.oauth2Login(withDefaults())
+//		.oauth2Login()
 		.logout(logout -> logout
 				.invalidateHttpSession(true)
 				.clearAuthentication(true)
