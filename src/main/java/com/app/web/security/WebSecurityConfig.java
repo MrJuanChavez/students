@@ -43,13 +43,20 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(auth -> {
-			auth.requestMatchers("/").permitAll();
+			auth.requestMatchers("/",
+					"/login",
+					"/oauth2/**",
+					"/oauth2/callback").permitAll();
 			auth.anyRequest().authenticated();
 		})
 		.formLogin(form -> form
 				.loginPage("/login")
 				.permitAll())
-//		.oauth2Login()
+		.oauth2Login(oauth -> oauth
+			.loginPage("/login")
+			.defaultSuccessUrl("/index", true)
+			.failureUrl("/login?error)")
+		)
 		.logout(logout -> logout
 				.invalidateHttpSession(true)
 				.clearAuthentication(true)
