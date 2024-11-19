@@ -7,13 +7,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
+import static org.springframework.security.config.Customizer.withDefaults;
 import com.app.web.service.UserService;
 
 @Configuration
+@EnableWebSecurity
 public class WebSecurityConfig {
 	
 	private final UserService userService;
@@ -26,7 +28,6 @@ public class WebSecurityConfig {
 
 	
 	@Bean
-//	@Lazy
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
 		auth.setUserDetailsService(userService);
@@ -41,21 +42,21 @@ public class WebSecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(authorize -> authorize.requestMatchers(
-				"/registry**", 
-				"/js/**", 
-				"/css/**", 
-				"/img/**").permitAll()
-				.anyRequest().authenticated())
+		http.authorizeHttpRequests(auth -> {
+			auth.requestMatchers("/").permitAll();
+			auth.anyRequest().authenticated();
+		})
 		.formLogin(form -> form
 				.loginPage("/login")
 				.permitAll())
+		.oauth2Login(withDefaults())
 		.logout(logout -> logout
 				.invalidateHttpSession(true)
 				.clearAuthentication(true)
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/login?logout")
 				.permitAll());
-		return http.build();
+		return http
+				.build();
 	}
 }
