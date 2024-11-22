@@ -45,6 +45,7 @@ public class WebSecurityConfig {
 		http.authorizeHttpRequests(auth -> {
 			auth.requestMatchers("/",
 					"/login",
+					"/registry",
 					"/oauth2/**",
 					"/oauth2/callback").permitAll();
 			auth.anyRequest().authenticated();
@@ -55,7 +56,7 @@ public class WebSecurityConfig {
 		.oauth2Login(oauth -> oauth
 			.loginPage("/login")
 			.defaultSuccessUrl("/index", true)
-			.failureUrl("/login?error)")
+			.failureUrl("/login?error")
 		)
 		.logout(logout -> logout
 				.invalidateHttpSession(true)
