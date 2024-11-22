@@ -1,7 +1,5 @@
 package com.app.web.dto;
 
-import jakarta.persistence.Column;
-
 public class UserRegistryDTO {
 
 	private Long id;
@@ -9,6 +7,7 @@ public class UserRegistryDTO {
 	private String lastname;
 	private String email;
 	private String password;
+	private boolean isAdmin;
 
 	public Long getId() {
 		return id;
@@ -74,6 +73,14 @@ public class UserRegistryDTO {
 
 	public UserRegistryDTO() {
 		super();
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 }

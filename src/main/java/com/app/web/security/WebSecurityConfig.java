@@ -2,7 +2,6 @@ package com.app.web.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -11,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import static org.springframework.security.config.Customizer.withDefaults;
+//import static org.springframework.security.config.Customizer.withDefaults;
 import com.app.web.service.UserService;
 
 @Configuration
@@ -43,21 +42,23 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(auth -> {
+			auth.requestMatchers("/admin/**").hasRole("ADMIN");
 			auth.requestMatchers("/",
 					"/login",
-					"/registry",
-					"/oauth2/**",
-					"/oauth2/callback").permitAll();
+					"/registry")
+//					"/oauth2/**",
+//					"/oauth2/callback")
+			.permitAll();
 			auth.anyRequest().authenticated();
 		})
 		.formLogin(form -> form
 				.loginPage("/login")
 				.permitAll())
-		.oauth2Login(oauth -> oauth
-			.loginPage("/login")
-			.defaultSuccessUrl("/index", true)
-			.failureUrl("/login?error")
-		)
+//		.oauth2Login(oauth -> oauth
+//			.loginPage("/login")
+//			.defaultSuccessUrl("/index", true)
+//			.failureUrl("/login?error")
+//		)
 		.logout(logout -> logout
 				.invalidateHttpSession(true)
 				.clearAuthentication(true)

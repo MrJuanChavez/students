@@ -34,10 +34,17 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public com.app.web.users.model.User save(UserRegistryDTO registryDTO) {
-		com.app.web.users.model.User user = new com.app.web.users.model.User(registryDTO.getName(), 
-				registryDTO.getLastname(), registryDTO.getEmail(), 
+		Rol defaultRole = new Rol("ROLE_ISER");
+		Rol adminRole = new Rol("ROLE_AMIN");
+		
+		boolean isAdmin = registryDTO.isAdmin();
+		
+		com.app.web.users.model.User user = new com.app.web.users.model.User(
+				registryDTO.getName(), 
+				registryDTO.getLastname(), 
+				registryDTO.getEmail(), 
 				passwordEncoder.encode(registryDTO.getPassword()), 
-				Arrays.asList(new Rol("ROLE_USER")));	
+				isAdmin ? Arrays.asList(adminRole, defaultRole) : Arrays.asList(defaultRole));	
 		return userRepository.save(user);
 	}
 
