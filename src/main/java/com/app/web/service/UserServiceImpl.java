@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public com.app.web.users.model.User save(UserRegistryDTO registryDTO) {
-		Rol defaultRole = new Rol("ROLE_ISER");
-		Rol adminRole = new Rol("ROLE_AMIN");
+		Rol defaultRole = new Rol("ROLE_USER");
+		Rol adminRole = new Rol("ROLE_ADMIN");
 		
 		boolean isAdmin = registryDTO.isAdmin();
 		
