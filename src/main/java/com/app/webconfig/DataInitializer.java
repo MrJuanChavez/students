@@ -4,13 +4,14 @@ import java.util.Arrays;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Component;
 
 import com.app.web.repository.UserRepository;
 import com.app.web.users.model.Rol;
 
-@Component
+@Configuration
 public class DataInitializer {
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder passwordEncoder;
